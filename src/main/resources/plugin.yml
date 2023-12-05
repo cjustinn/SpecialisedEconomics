@@ -1,0 +1,25 @@
+name: SpecialisedEconomics
+version: '${project.version}'
+main: io.github.cjustinn.specialisedeconomics.SpecialisedEconomics
+prefix: 'SpecialisedEconomics'
+api-version: '1.20'
+load: STARTUP
+depend: [Vault]
+description: An alternative economy plugin, built to support multiple types of data storage and easy external service integration.
+commands:
+  balance:
+    description: Check your current balance, or that of another player.
+    usage: /balance
+    aliases:
+      - bal
+    permission: specialisedeconomics.balance
+  balancetop:
+    description: See a list of all players balances, sorted descending.
+    usage: /balancetop
+    aliases:
+      - baltop
+    permission: specialisedeconomics.balance.top
+  pay:
+    description: Transfer funds from your user account to another player's account.
+    usage: /pay <target> <amount>
+    permission: specialisedeconomics.pay

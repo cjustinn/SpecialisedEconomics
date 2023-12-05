@@ -1,0 +1,41 @@
+mysql:
+  # Should the plugin use a MySQL database to store plugin data. When disabled, SQLite will be used. Enable for MySQL db storage. Defaults to false.
+  enabled: false
+  host: localhost
+  port: 3306
+  database: ''
+  username: ''
+  password: ''
+limits:
+  # The maximum possible account balance. Defaults to 100,000,000,000.
+  maxBalance: 100000000000
+  # The minimum possible account balance. If below zero, the limit will act as the maximum loan amount that a player can receive (if enabled). Defaults to -10,000
+  minBalance: -10000
+  # The minimum allowed payment amount. Payments between players must equal or exceed this value. Defaults to 0.01.
+  minPaymentAmount: 0.01
+general:
+  # Should player balances be allowed to go negative, down to limits.minBalance, if they make a payment with insufficient funds? Defaults to true.
+  allowLoans: true
+  # The symbol to be used as the currency symbol. Defaults to '$'.
+  currencySymbol: '$'
+  # Should the currency symbol come before the value or after? Set to true to use the symbol as a prefix, false to use as a suffix. Defaults to true.
+  currencySymbolIsPrefix: true
+  # The format that should be used when formatting currency values. Defaults to "#,##0.00".
+  currencyFormat: '#,##0.00'
+  # The currency value that new players should begin with. Defaults to 0.00.
+  startingBalance: 0.00
+  # The maximum number of users to display per page when using the /baltop command.
+  baltopUsersPerPage: 5
+api:
+  general:
+    # Should the server allow external services to integrate with SpecialisedEconomics? Defaults to true.
+    enabled: true
+    # Should the server require external services to provide a link token affect user accounts? Defaults to true.
+    requireLinkToken: true
+    # The port that the server should use to listen for incoming requests from external services.
+    port: 0000
+  endpoints:
+    # Should the server allow external services to check user balances? Defaults to true.
+    allowBalanceQueries: true
+    # Should the server allow external services to modify user balances? Defaults to false.
+    allowBalanceModificationQueries: false
