@@ -6,7 +6,7 @@
 
     <groupId>io.github.cjustinn</groupId>
     <artifactId>SpecialisedEconomics</artifactId>
-    <version>0.1.0-ALPHA</version>
+    <version>0.8.0-BETA</version>
     <packaging>jar</packaging>
 
     <name>SpecialisedEconomics</name>
@@ -84,6 +84,11 @@
             <artifactId>VaultAPI</artifactId>
             <version>1.7</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.cjustinn</groupId>
+            <artifactId>SpecialisedLib</artifactId>
+            <version>1.0.0-RELEASE</version>
         </dependency>
     </dependencies>
 </project>

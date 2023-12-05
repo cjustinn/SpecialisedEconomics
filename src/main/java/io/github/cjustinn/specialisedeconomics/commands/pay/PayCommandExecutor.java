@@ -2,7 +2,7 @@ package io.github.cjustinn.specialisedeconomics.commands.pay;
 
 import io.github.cjustinn.specialisedeconomics.repositories.PluginSettingsRepository;
 import io.github.cjustinn.specialisedeconomics.services.EconomyService;
-import io.github.cjustinn.specialisedeconomics.services.LoggingService;
+import io.github.cjustinn.specialisedlib.Logging.LoggingService;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;

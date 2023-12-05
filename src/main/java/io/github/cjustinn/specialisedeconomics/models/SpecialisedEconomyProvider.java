@@ -2,17 +2,15 @@ package io.github.cjustinn.specialisedeconomics.models;
 
 import io.github.cjustinn.specialisedeconomics.repositories.PluginSettingsRepository;
 import io.github.cjustinn.specialisedeconomics.repositories.UserRepository;
-import io.github.cjustinn.specialisedeconomics.services.LoggingService;
 import io.github.cjustinn.specialisedeconomics.services.UtilService;
+import io.github.cjustinn.specialisedlib.Economy.SpecialisedEconomy;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.OfflinePlayer;
 
-import java.text.DecimalFormat;
 import java.util.List;
-import java.util.logging.Level;
 
-public class SpecialisedEconomyProvider implements Economy {
+public class SpecialisedEconomyProvider implements SpecialisedEconomy {
     @Override
     public boolean isEnabled() {
         return true;
@@ -245,5 +243,25 @@ public class SpecialisedEconomyProvider implements Economy {
     @Override
     public boolean createPlayerAccount(OfflinePlayer offlinePlayer, String s) {
         return this.createPlayerAccount(offlinePlayer);
+    }
+
+    @Override
+    public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, double v, String s, String s1) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse depositPlayer(OfflinePlayer offlinePlayer, double v, String s, String s1) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse bankWithdraw(String s, double v, String s1, String s2) {
+        return null;
+    }
+
+    @Override
+    public EconomyResponse bankDeposit(String s, double v, String s1, String s2) {
+        return null;
     }
 }

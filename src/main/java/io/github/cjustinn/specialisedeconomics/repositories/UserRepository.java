@@ -1,24 +1,22 @@
 package io.github.cjustinn.specialisedeconomics.repositories;
 
 import io.github.cjustinn.specialisedeconomics.enums.DatabaseQuery;
-import io.github.cjustinn.specialisedeconomics.enums.DatabaseQueryValueType;
 import io.github.cjustinn.specialisedeconomics.models.SpecialisedEconomyUser;
-import io.github.cjustinn.specialisedeconomics.models.sql.DatabaseQueryValue;
-import io.github.cjustinn.specialisedeconomics.services.DatabaseService;
-import io.github.cjustinn.specialisedeconomics.services.LoggingService;
+import io.github.cjustinn.specialisedlib.Database.DatabaseService;
+import io.github.cjustinn.specialisedlib.Database.DatabaseValue;
+import io.github.cjustinn.specialisedlib.Database.DatabaseValueType;
 
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 public class UserRepository {
     public static Map<String, SpecialisedEconomyUser> users = new HashMap<String, SpecialisedEconomyUser>();
 
     public static boolean createUser(final String uuid) {
-        if (DatabaseService.RunUpdate(DatabaseQuery.InsertUser, new DatabaseQueryValue[] {
-                new DatabaseQueryValue(1, uuid, DatabaseQueryValueType.String),
-                new DatabaseQueryValue(2, PluginSettingsRepository.startingBalance, DatabaseQueryValueType.Double)
+        if (DatabaseService.RunUpdate(DatabaseQuery.InsertUser, new DatabaseValue[] {
+                new DatabaseValue(1, uuid, DatabaseValueType.String),
+                new DatabaseValue(2, PluginSettingsRepository.startingBalance, DatabaseValueType.Double)
         })) {
             users.put(uuid, new SpecialisedEconomyUser(uuid, null, PluginSettingsRepository.startingBalance, new Date()));
             return true;

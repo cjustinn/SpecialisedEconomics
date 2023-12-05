@@ -10,13 +10,13 @@ import io.github.cjustinn.specialisedeconomics.enums.DatabaseQuery;
 import io.github.cjustinn.specialisedeconomics.listeners.PlayerListener;
 import io.github.cjustinn.specialisedeconomics.models.SpecialisedEconomyProvider;
 import io.github.cjustinn.specialisedeconomics.models.SpecialisedEconomyUser;
-import io.github.cjustinn.specialisedeconomics.models.sql.MySQLCredential;
 import io.github.cjustinn.specialisedeconomics.repositories.PluginSettingsRepository;
 import io.github.cjustinn.specialisedeconomics.repositories.UserRepository;
 import io.github.cjustinn.specialisedeconomics.services.ApiService;
-import io.github.cjustinn.specialisedeconomics.services.DatabaseService;
 import io.github.cjustinn.specialisedeconomics.services.EconomyService;
-import io.github.cjustinn.specialisedeconomics.services.LoggingService;
+import io.github.cjustinn.specialisedlib.Database.DatabaseCredentials;
+import io.github.cjustinn.specialisedlib.Database.DatabaseService;
+import io.github.cjustinn.specialisedlib.Logging.LoggingService;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -26,13 +26,10 @@ import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 import spark.Spark;
 
-import javax.xml.crypto.Data;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.concurrent.Callable;
-import java.util.function.Function;
 import java.util.logging.Level;
 
 import static spark.Spark.*;
@@ -100,7 +97,7 @@ public final class SpecialisedEconomics extends JavaPlugin {
 
         // Set MySQL settings
         DatabaseService.enableMySQL = config.getBoolean("mysql.enabled", false);
-        DatabaseService.credentials = new MySQLCredential(config.getConfigurationSection("mysql"));
+        DatabaseService.credentials = new DatabaseCredentials(config.getConfigurationSection("mysql"));
 
         return true;
     }
@@ -199,7 +196,7 @@ public final class SpecialisedEconomics extends JavaPlugin {
             };
 
             for (DatabaseQuery query : installOrder) {
-                if (initialisedTables && ((DatabaseService.enableMySQL ? query.mysql : query.sqlite).length() > 0)) {
+                if (initialisedTables && (query.getQuery(DatabaseService.enableMySQL).length() > 0)) {
                     initialisedTables = initialisedTables && DatabaseService.RunUpdate(query);
 
                     if (!initialisedTables) {

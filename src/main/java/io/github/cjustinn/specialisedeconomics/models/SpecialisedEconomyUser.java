@@ -1,10 +1,10 @@
 package io.github.cjustinn.specialisedeconomics.models;
 
 import io.github.cjustinn.specialisedeconomics.enums.DatabaseQuery;
-import io.github.cjustinn.specialisedeconomics.enums.DatabaseQueryValueType;
-import io.github.cjustinn.specialisedeconomics.models.sql.DatabaseQueryValue;
 import io.github.cjustinn.specialisedeconomics.repositories.PluginSettingsRepository;
-import io.github.cjustinn.specialisedeconomics.services.DatabaseService;
+import io.github.cjustinn.specialisedlib.Database.DatabaseService;
+import io.github.cjustinn.specialisedlib.Database.DatabaseValue;
+import io.github.cjustinn.specialisedlib.Database.DatabaseValueType;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 public class SpecialisedEconomyUser {
@@ -74,10 +73,10 @@ public class SpecialisedEconomyUser {
     }
 
     public boolean save() {
-        return DatabaseService.RunUpdate(DatabaseQuery.UpdateUser, new DatabaseQueryValue[] {
-                new DatabaseQueryValue(1, this.discordId, DatabaseQueryValueType.String),
-                new DatabaseQueryValue(2, this.balance, DatabaseQueryValueType.Double),
-                new DatabaseQueryValue(3, this.uuid, DatabaseQueryValueType.String)
+        return DatabaseService.RunUpdate(DatabaseQuery.UpdateUser, new DatabaseValue[] {
+                new DatabaseValue(1, this.discordId, DatabaseValueType.String),
+                new DatabaseValue(2, this.balance, DatabaseValueType.Double),
+                new DatabaseValue(3, this.uuid, DatabaseValueType.String)
         });
     }
 }

@@ -1,7 +1,7 @@
 package io.github.cjustinn.specialisedeconomics.listeners;
 
 import io.github.cjustinn.specialisedeconomics.repositories.UserRepository;
-import io.github.cjustinn.specialisedeconomics.services.LoggingService;
+import io.github.cjustinn.specialisedlib.Logging.LoggingService;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
