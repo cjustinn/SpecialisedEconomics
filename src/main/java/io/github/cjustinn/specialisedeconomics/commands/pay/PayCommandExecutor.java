@@ -37,7 +37,14 @@ public class PayCommandExecutor implements CommandExecutor {
                 Player player = (Player) commandSender;
                 OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 
-                if (EconomyService.getEconomy().hasAccount(target)) {
+                if (player.getUniqueId().equals(target.getUniqueId())) {
+                    commandSender.sendMessage(
+                            Component.text(
+                                    "You cannot send a payment to yourself.",
+                                    NamedTextColor.RED
+                            )
+                    );
+                } else if (EconomyService.getEconomy().hasAccount(target)) {
                     try {
                         final double paymentAmount = Double.parseDouble(args[1]);
                         if (paymentAmount < PluginSettingsRepository.minimumPaymentAmount) {
@@ -56,9 +63,9 @@ public class PayCommandExecutor implements CommandExecutor {
                             );
                         } else {
                             // Remove the funds from the commandSender player.
-                            if (EconomyService.getEconomy().withdrawPlayer(player, paymentAmount).transactionSuccess()) {
+                            if (EconomyService.getEconomy().withdrawPlayer(player, paymentAmount, target.getUniqueId().toString(), String.format("You sent an in-game payment to %s.", target.getName())).transactionSuccess()) {
                                 // Add the funds to the target.
-                                if (EconomyService.getEconomy().depositPlayer(target, paymentAmount).transactionSuccess()) {
+                                if (EconomyService.getEconomy().depositPlayer(target, paymentAmount, player.getUniqueId().toString(), String.format("You were sent an in-game payment by %s.", player.getName())).transactionSuccess()) {
                                     // Alert the user that their payment has been made.
                                     player.sendMessage(
                                             Component.text(
@@ -97,7 +104,7 @@ public class PayCommandExecutor implements CommandExecutor {
                                             )
                                     );
 
-                                    if (!EconomyService.getEconomy().depositPlayer(player, paymentAmount).transactionSuccess()) {
+                                    if (!EconomyService.getEconomy().depositPlayer(player, paymentAmount, player.getUniqueId().toString(), String.format("Your payment to %s failed and you have been refunded.", target.getName())).transactionSuccess()) {
                                         LoggingService.writeLog(Level.SEVERE, String.format("Failed to refund %s to %s on failed target deposit.", EconomyService.getEconomy().format(paymentAmount), player.getName()));
                                     }
                                 }

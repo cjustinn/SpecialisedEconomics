@@ -16,6 +16,7 @@ import io.github.cjustinn.specialisedeconomics.services.ApiService;
 import io.github.cjustinn.specialisedeconomics.services.EconomyService;
 import io.github.cjustinn.specialisedlib.Database.DatabaseCredentials;
 import io.github.cjustinn.specialisedlib.Database.DatabaseService;
+import io.github.cjustinn.specialisedlib.Economy.SpecialisedEconomy;
 import io.github.cjustinn.specialisedlib.Logging.LoggingService;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -62,7 +63,7 @@ public final class SpecialisedEconomics extends JavaPlugin {
         Plugin vault = getServer().getPluginManager().getPlugin("Vault");
         if (vault != null) {
             Bukkit.getServicesManager().register(Economy.class, new SpecialisedEconomyProvider(), vault, ServicePriority.Normal);
-            EconomyService.setEconomy(Bukkit.getServicesManager().getRegistration(Economy.class).getProvider());
+            EconomyService.setEconomy((SpecialisedEconomy) Bukkit.getServicesManager().getRegistration(Economy.class).getProvider());
 
             return true;
         } else return false;

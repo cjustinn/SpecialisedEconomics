@@ -246,22 +246,28 @@ public class SpecialisedEconomyProvider implements SpecialisedEconomy {
     }
 
     @Override
-    public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, double v, String s, String s1) {
+    public EconomyResponse withdrawPlayer(OfflinePlayer offlinePlayer, double amount, String target, String details) {
+        if (this.hasAccount(offlinePlayer) && amount > 0) {
+            SpecialisedEconomyUser economyUser = UserRepository.users.get(offlinePlayer.getUniqueId().toString());
+            return economyUser.modifyBalance(-amount, target, details);
+        } else return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "You do not have an account registered with SpecialisedEconomics!");
+    }
+
+    @Override
+    public EconomyResponse depositPlayer(OfflinePlayer offlinePlayer, double amount, String target, String details) {
+        if (this.hasAccount(offlinePlayer) && amount > 0) {
+            SpecialisedEconomyUser economyUser = UserRepository.users.get(offlinePlayer.getUniqueId().toString());
+            return economyUser.modifyBalance(amount, target, details);
+        } else return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "You do not have an account registered with SpecialisedEconomics!");
+    }
+
+    @Override
+    public EconomyResponse bankWithdraw(String bank, double amount, String target, String details) {
         return null;
     }
 
     @Override
-    public EconomyResponse depositPlayer(OfflinePlayer offlinePlayer, double v, String s, String s1) {
-        return null;
-    }
-
-    @Override
-    public EconomyResponse bankWithdraw(String s, double v, String s1, String s2) {
-        return null;
-    }
-
-    @Override
-    public EconomyResponse bankDeposit(String s, double v, String s1, String s2) {
+    public EconomyResponse bankDeposit(String bank, double amount, String target, String details) {
         return null;
     }
 }

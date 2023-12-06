@@ -44,8 +44,13 @@ public enum DatabaseQuery implements DatabaseMultiQuery {
             "update_user",
             "UPDATE se_users SET discord_id = ?, balance = ? WHERE uuid = ?;",
             "UPDATE se_users SET discord_id = ?, balance = ? WHERE uuid = ?;"
-    )
+    ),
     // User Transaction Queries
+    InsertUserTransaction(
+            "insert_user_transaction",
+            "INSERT INTO se_transactions (transaction_owner, sender, recipient, amount, balance, details) VALUES (?, ?, ?, ?, ?, ?);",
+            "INSERT INTO se_transactions (transaction_owner, sender, recipient, amount, balance, details) VALUES (?, ?, ?, ?, ?, ?);"
+    )
     // Bank Queries
     // Bank Transaction Queries
     // Bank Member Queries
