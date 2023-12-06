@@ -86,7 +86,7 @@ public class SpecialisedEconomyUser {
     }
 
     public EconomyResponse modifyBalance(double amount) {
-        return this.modifyBalance(this.balance + amount, "Unknown", "The cause of this transaction is unknown. The plugin which triggered this transaction does not integrate with SpecialisedEconomies.");
+        return this.modifyBalance(amount, "Unknown", "The cause of this transaction is unknown. The plugin which triggered this transaction does not integrate with SpecialisedEconomies.");
     }
 
     public boolean hasBalance(double target) {
